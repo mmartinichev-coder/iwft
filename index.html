@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IWFT Growth Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0B0D18;--ink2:#10121F;--ink3:#13162A;--card:#0F1120;
+  --gold:#C9A84C;--gold-light:#E8C97A;--gold-pale:rgba(201,168,76,.12);
+  --cream:#F5F0E8;--cream-dim:rgba(245,240,232,.62);--cream-muted:rgba(245,240,232,.3);
+  --slate:#7A8298;--line:rgba(201,168,76,.16);--teal:#1AD6C0;--green:#2ECC8A;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Montserrat',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--cream);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+section{padding:110px 0;border-top:1px solid var(--line)}
+.eyebrow{font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.eyebrow::before{content:"";width:36px;height:1px;background:var(--gold)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.08}
+h2{font-size:clamp(2.2rem,4.6vw,3.6rem);margin-bottom:20px;text-wrap:balance}
+h2 em,h1 em{color:var(--gold-light);font-style:italic}
+.lead{color:var(--cream-dim);max-width:660px;font-size:1.02rem}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;border:1px solid var(--gold);transition:.25s}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:var(--gold-light)}
+.btn-ghost{color:var(--gold-light)}
+.btn-ghost:hover{background:var(--gold-pale)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;background:rgba(11,13,24,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-family:var(--serif);font-size:1.55rem;letter-spacing:.01em}
+.logo em{color:var(--gold);font-style:italic}
+.logo small{font-family:var(--sans);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--slate);margin-left:10px;border:1px solid var(--line);padding:3px 7px;vertical-align:middle}
+nav ul{display:flex;gap:30px;list-style:none;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-dim)}
+nav ul a:hover{color:var(--gold-light)}
+.nav-cta{display:flex;gap:10px}
+.nav-cta .btn{padding:10px 18px;font-size:.68rem}
+
+/* HERO */
+.hero{border-top:0;padding:90px 0 70px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 78% 40%,rgba(201,168,76,.13),transparent 70%),radial-gradient(ellipse 40% 40% at 10% 90%,rgba(26,214,192,.06),transparent 70%)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center;position:relative}
+.hero h1{font-size:clamp(3rem,6.6vw,5.4rem);margin-bottom:26px}
+.hero h1 strong{font-weight:600;display:block}
+.hero .rule{width:80px;height:1px;background:var(--gold);margin:0 0 26px}
+.hero p.sub{color:var(--cream-dim);font-size:1.08rem;max-width:540px;margin-bottom:14px}
+.connect{font-family:var(--mono);font-size:.78rem;color:var(--gold-light);letter-spacing:.06em;margin-bottom:36px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.map{width:100%;aspect-ratio:1/1;max-width:520px;margin-left:auto}
+.map .node circle.pulse{animation:pulse 3s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(3.2);opacity:0}}
+.map .link{stroke-dasharray:4 6;animation:dash 14s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-200}}
+.trust{display:flex;gap:40px;flex-wrap:wrap;margin-top:60px;padding-top:30px;border-top:1px solid var(--line);position:relative}
+.trust div{font-family:var(--serif);font-size:2.2rem;color:var(--gold-light);line-height:1}
+.trust span{display:block;font-family:var(--sans);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--slate);margin-top:8px}
+
+/* PROBLEM STRIP */
+.collapse{background:var(--ink2)}
+.collapse-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:40px;align-items:center;margin-top:50px}
+.vendors{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vendors div{border:1px dashed rgba(122,130,152,.4);padding:13px 16px;font-size:.82rem;color:var(--slate);display:flex;justify-content:space-between}
+.vendors div b{font-family:var(--mono);font-weight:400;font-size:.72rem}
+.arrow{font-family:var(--serif);font-size:3rem;color:var(--gold)}
+.one{border:1px solid var(--gold);background:linear-gradient(160deg,rgba(201,168,76,.14),transparent 60%);padding:36px}
+.one h3{font-size:2.3rem;margin-bottom:14px}
+.one ul{list-style:none;display:grid;gap:8px;font-size:.9rem;color:var(--cream-dim)}
+.one li::before{content:"✦";color:var(--gold);margin-right:10px;font-size:.7rem}
+
+/* ENGINES */
+.engines-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:56px}
+.engine{background:var(--card);padding:32px 26px;position:relative;transition:background .25s;display:flex;flex-direction:column}
+.engine:hover{background:var(--ink3)}
+.engine .num{font-family:var(--mono);font-size:.72rem;color:var(--gold);letter-spacing:.1em}
+.engine .ico{width:44px;height:44px;border:1px solid var(--line);display:grid;place-items:center;margin:18px 0 20px;color:var(--gold-light)}
+.engine h3{font-size:1.7rem;margin-bottom:4px}
+.engine .tag{font-size:.82rem;color:var(--gold-light);font-style:italic;font-family:var(--serif);margin-bottom:16px;font-size:1.05rem}
+.engine ul{list-style:none;font-size:.8rem;color:var(--cream-dim);display:grid;gap:6px;margin-bottom:18px}
+.engine li::before{content:"—";color:var(--gold);margin-right:8px}
+.engine li.partner{color:var(--teal)}
+.engine li.partner::before{content:"⇄";color:var(--teal)}
+.engine .benefit{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-size:.76rem;color:var(--cream)}
+.engine .benefit b{color:var(--gold);letter-spacing:.14em;text-transform:uppercase;font-size:.62rem;display:block;margin-bottom:4px}
+.engine.summary{background:linear-gradient(160deg,rgba(201,168,76,.18),var(--card) 70%);justify-content:center}
+.engine.summary h3{font-size:2rem}
+.partner-note{margin-top:22px;display:flex;gap:14px;align-items:flex-start;border:1px solid rgba(26,214,192,.3);background:rgba(26,214,192,.05);padding:18px 22px;font-size:.85rem;color:var(--cream-dim)}
+.partner-note strong{color:var(--teal)}
+
+/* SOCIETY WAVE */
+.wave-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center}
+.eco{width:100%;max-width:560px}
+.receive{display:grid;gap:14px;margin-top:34px}
+.receive .r{border-left:2px solid var(--gold);padding:14px 20px;background:var(--card)}
+.receive .r h4{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.receive .r p{font-size:.85rem;color:var(--cream-dim)}
+
+/* ACCELERATOR */
+.accel{background:var(--ink2)}
+.accel-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;margin-top:50px}
+.retainer{border:1px solid var(--gold);padding:40px;background:var(--card);position:relative}
+.retainer .lbl{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--slate)}
+.retainer .price{font-family:var(--serif);font-size:clamp(2.6rem,5vw,3.6rem);color:var(--gold-light);line-height:1.1;margin:10px 0 4px}
+.retainer .per{font-size:.82rem;color:var(--cream-dim);margin-bottom:26px}
+.alloc{display:grid;gap:12px}
+.alloc .row{display:grid;grid-template-columns:1fr 46px;gap:12px;align-items:center;font-size:.8rem}
+.alloc .bar{grid-column:1/-1;height:4px;background:rgba(245,240,232,.07);margin-top:-6px}
+.alloc .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light))}
+.alloc .row span:last-child{font-family:var(--mono);color:var(--gold-light);text-align:right;font-size:.75rem}
+.flow{list-style:none;counter-reset:s;position:relative}
+.flow li{counter-increment:s;display:grid;grid-template-columns:54px 1fr;gap:20px;padding-bottom:26px;position:relative}
+.flow li::before{content:counter(s,decimal-leading-zero);width:54px;height:54px;border:1px solid var(--gold);display:grid;place-items:center;font-family:var(--mono);font-size:.8rem;color:var(--gold);background:var(--ink2);position:relative;z-index:1}
+.flow li:not(:last-child)::after{content:"";position:absolute;left:27px;top:54px;bottom:0;width:1px;background:var(--line)}
+.flow li:last-child::before{background:var(--gold);color:var(--ink)}
+.flow h4{font-family:var(--serif);font-size:1.45rem;font-weight:400;margin-top:4px}
+.flow p{font-size:.82rem;color:var(--cream-dim)}
+
+/* SEMINAR */
+.sem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:50px}
+.sem-card{background:var(--card);border:1px solid var(--line);padding:34px}
+.sem-card h3{font-size:1.6rem;margin-bottom:18px}
+.markets{display:flex;flex-wrap:wrap;gap:10px}
+.markets span{border:1px solid var(--line);padding:9px 14px;font-size:.78rem;display:flex;align-items:center;gap:8px}
+.markets span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+.topics{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.topics span{padding:12px 14px;background:var(--ink3);font-size:.8rem;border-left:2px solid var(--teal)}
+.sem-foot{margin-top:24px;font-size:.85rem;color:var(--cream-dim);display:flex;gap:10px;align-items:center}
+.sem-foot b{color:var(--teal);font-weight:600}
+
+/* DASHBOARD */
+.dash{background:var(--ink2)}
+.console{margin-top:50px;border:1px solid var(--line);background:#0A0C16;box-shadow:0 40px 100px rgba(0,0,0,.5)}
+.console-top{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:.72rem;color:var(--slate)}
+.dots{display:flex;gap:7px}.dots i{width:10px;height:10px;border-radius:50%;background:#2a2d40}
+.live{color:var(--green)}.live::before{content:"● "}
+.console-body{display:grid;grid-template-columns:200px 1fr}
+.side{border-right:1px solid var(--line);padding:20px 0;font-size:.76rem}
+.side a{display:flex;gap:10px;padding:10px 22px;color:var(--cream-dim)}
+.side a.on{color:var(--gold-light);background:var(--gold-pale);border-left:2px solid var(--gold)}
+.main{padding:26px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.kpi{background:#0D0F1C;padding:20px}
+.kpi .k{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--slate)}
+.kpi .v{font-family:var(--serif);font-size:2.1rem;line-height:1.15;margin-top:6px}
+.kpi .d{font-family:var(--mono);font-size:.68rem;color:var(--green)}
+.kpi.hi .v{color:var(--gold-light)}
+.panels{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;margin-top:18px}
+.panel{border:1px solid var(--line);background:#0D0F1C;padding:20px}
+.panel h5{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--slate);margin-bottom:16px;font-weight:600;display:flex;justify-content:space-between}
+.chart{display:flex;align-items:flex-end;gap:10px;height:150px;border-bottom:1px solid var(--line)}
+.chart div{flex:1;background:linear-gradient(180deg,var(--gold-light),rgba(201,168,76,.25));position:relative}
+.chart div:last-child{background:linear-gradient(180deg,var(--teal),rgba(26,214,192,.2))}
+.chart-x{display:flex;gap:10px;font-family:var(--mono);font-size:.6rem;color:var(--slate);margin-top:6px}
+.chart-x span{flex:1;text-align:center}
+.funnel{display:grid;gap:10px}
+.funnel .f{display:grid;grid-template-columns:110px 1fr 50px;gap:10px;align-items:center;font-size:.74rem}
+.funnel .f>div{height:8px;background:rgba(245,240,232,.06)}
+.funnel .f>div i{display:block;height:100%;background:var(--gold)}
+.funnel .f span:last-child{font-family:var(--mono);text-align:right;color:var(--gold-light);font-size:.7rem}
+.feed{margin-top:18px;font-family:var(--mono);font-size:.7rem;color:var(--cream-dim);display:grid;gap:8px}
+.feed div{display:grid;grid-template-columns:70px 1fr auto;gap:12px}
+.feed .t{color:var(--slate)}.feed .amt{color:var(--green)}
+
+/* COMPARE */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:50px}
+.cmp-col{padding:40px;border:1px solid var(--line);background:var(--card)}
+.cmp-col h3{font-size:1.9rem;margin-bottom:6px}
+.cmp-col .s{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--slate);margin-bottom:24px}
+.cmp-col ul{list-style:none;display:grid;gap:10px;font-size:.9rem}
+.cmp-col.old li{color:var(--slate);text-decoration:line-through;text-decoration-color:rgba(224,92,122,.6)}
+.cmp-col.old li::before{content:"✕ ";color:#E05C7A;text-decoration:none;display:inline-block;margin-right:6px}
+.cmp-col.new{border-color:var(--gold);background:linear-gradient(160deg,rgba(201,168,76,.12),var(--card) 60%)}
+.cmp-col.new li::before{content:"✓";color:var(--gold);margin-right:12px}
+.cmp-col .tot{margin-top:28px;padding-top:18px;border-top:1px solid var(--line);font-family:var(--serif);font-size:1.4rem;font-style:italic}
+.cmp-col.old .tot{color:var(--slate)}.cmp-col.new .tot{color:var(--gold-light)}
+
+/* CTA */
+.cta{text-align:center;background:radial-gradient(ellipse 60% 70% at 50% 100%,rgba(201,168,76,.16),transparent 70%)}
+.cta .stack{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:30px auto 34px;max-width:720px}
+.cta .stack span{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--line);padding:8px 14px;color:var(--cream-dim)}
+.cta h2{font-size:clamp(2.4rem,5.4vw,4.4rem)}
+.cta .tagline{font-family:var(--serif);font-style:italic;font-size:1.5rem;color:var(--gold-light);margin-bottom:36px}
+.cta .hero-btns{justify-content:center}
+
+footer{border-top:1px solid var(--line);padding:50px 0 40px;font-size:.74rem;color:var(--slate)}
+footer .wrap{display:grid;gap:22px}
+.foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;align-items:center}
+.disclaimer{line-height:1.7;max-width:980px}
+
+@media (max-width:1100px){nav ul{display:none}}
+.btn{white-space:nowrap}
+@media (max-width:1000px){
+  nav ul{display:none}
+  .hero-grid,.wave-grid,.accel-grid,.collapse-grid{grid-template-columns:1fr}
+  .map{margin:0 auto;max-width:420px}
+  .arrow{transform:rotate(90deg);text-align:center}
+  .engines-grid{grid-template-columns:repeat(2,1fr)}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .panels,.cmp,.sem-grid{grid-template-columns:1fr}
+  .console-body{grid-template-columns:1fr}.side{display:none}
+}
+@media (max-width:600px){
+  .wrap{padding:0 16px}
+  section{padding:76px 0}
+  .nav-cta .btn-ghost,.logo small{display:none}
+  .nav-cta .btn{padding:9px 12px;font-size:.62rem;letter-spacing:.1em}
+  .engines-grid,.vendors,.topics{grid-template-columns:1fr}
+  .retainer,.cmp-col,.sem-card,.one{padding:26px}
+  .main{padding:14px}
+  .kpi .v{font-size:1.6rem}
+  .funnel .f{grid-template-columns:90px 1fr 44px}
+  .feed div{grid-template-columns:1fr auto}.feed .t{display:none}
+}
+
+button.btn{font-family:var(--sans);cursor:pointer;background:none}
+button.btn-gold{background:var(--gold)}
+/* MODAL */
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(5,6,12,.78);backdrop-filter:blur(6px)}
+.modal.open{display:flex}
+.modal-box{width:100%;max-width:480px;max-height:calc(100vh - 32px);overflow:auto;background:var(--card);border:1px solid var(--gold);padding:36px;position:relative;animation:pop .25s ease}
+@keyframes pop{from{transform:translateY(12px);opacity:0}}
+.modal-x{position:absolute;top:12px;right:14px;background:none;border:0;color:var(--slate);font-size:1.6rem;cursor:pointer;line-height:1}
+.modal-x:hover{color:var(--gold-light)}
+.modal h3{font-size:2rem;margin-bottom:6px}
+.modal .msub{font-size:.85rem;color:var(--cream-dim);margin-bottom:22px}
+.modal form{display:grid;gap:14px}
+.modal label{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--slate);display:grid;gap:6px}
+.modal input,.modal select,.modal textarea{font:inherit;font-size:.9rem;letter-spacing:0;text-transform:none;color:var(--cream);background:var(--ink);border:1px solid var(--line);padding:12px 14px;outline:none}
+.modal input:focus,.modal select:focus,.modal textarea:focus{border-color:var(--gold)}
+.modal .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.modal .btn{justify-content:center;margin-top:6px;border:1px solid var(--gold)}
+.modal .done{text-align:center;padding:20px 0}
+.modal .done .check{width:60px;height:60px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;color:var(--gold-light);font-size:1.6rem}
+.modal .alt{font-size:.75rem;color:var(--slate);text-align:center;margin-top:4px}
+.modal .alt a{color:var(--gold-light);cursor:pointer}
+.flash{animation:flash 1.6s ease}
+@keyframes flash{0%,100%{box-shadow:0 40px 100px rgba(0,0,0,.5)}30%{box-shadow:0 0 0 2px var(--gold),0 0 60px rgba(201,168,76,.35)}}
+.side a{cursor:pointer}
+@media (max-width:600px){.modal-box{padding:26px}.modal .two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">IWould<em>Fund</em>That<small>Platform</small></a>
+    <ul>
+      <li><a href="#engines">Platform</a></li>
+      <li><a href="#wave">Society Wave</a></li>
+      <li><a href="#accelerator">Accelerator</a></li>
+      <li><a href="#seminars">Seminars</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+    </ul>
+    <div class="nav-cta">
+      <button class="btn btn-ghost" data-modal="login">Login</button>
+      <button class="btn btn-gold" data-modal="demo">Request Demo</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">The Operating System for Organic Growth</div>
+        <h1>One Platform.<strong>One Budget.</strong><em>One Growth Engine.</em></h1>
+        <div class="rule"></div>
+        <p class="sub">IWouldFundThat combines capital formation, seminar marketing, payments, referrals and your customer data into one system — so RIAs and growth companies stop paying seven vendors to do one job.</p>
+        <p class="connect">RIAs &nbsp;•&nbsp; Growth Companies &nbsp;•&nbsp; Investors &nbsp;•&nbsp; Seminars</p>
+        <div class="hero-btns">
+          <button class="btn btn-gold" data-modal="strategy">Schedule Strategy Session</button>
+          <a class="btn btn-ghost" href="#dashboard" data-demo>Watch Demo →</a>
+        </div>
+      </div>
+
+      <!-- National seminar network map -->
+      <svg class="map" viewBox="0 0 500 500" role="img" aria-label="National seminar growth network connecting seven markets to the IWFT hub">
+        <defs>
+          <radialGradient id="hubg"><stop offset="0" stop-color="#E8C97A"/><stop offset="1" stop-color="#C9A84C" stop-opacity="0"/></radialGradient>
+        </defs>
+        <circle cx="250" cy="250" r="230" fill="none" stroke="rgba(201,168,76,.12)"/>
+        <circle cx="250" cy="250" r="160" fill="none" stroke="rgba(201,168,76,.10)"/>
+        <circle cx="250" cy="250" r="90" fill="none" stroke="rgba(201,168,76,.08)"/>
+        <g stroke="#C9A84C" stroke-opacity=".55" fill="none" class="links">
+          <line class="link" x1="250" y1="250" x2="70"  y2="200"/>
+          <line class="link" x1="250" y1="250" x2="110" y2="110"/>
+          <line class="link" x1="250" y1="250" x2="130" y2="330"/>
+          <line class="link" x1="250" y1="250" x2="215" y2="80"/>
+          <line class="link" x1="250" y1="250" x2="300" y2="400"/>
+          <line class="link" x1="250" y1="250" x2="420" y2="170"/>
+          <line class="link" x1="250" y1="250" x2="435" y2="330"/>
+          <line class="link" x1="250" y1="250" x2="360" y2="90"/>
+        </g>
+        <g font-family="Montserrat" font-size="11" fill="#F5F0E8" letter-spacing="1">
+          <g class="node"><circle class="pulse" cx="70" cy="200" r="5" fill="#C9A84C"/><circle cx="70" cy="200" r="5" fill="#C9A84C"/><text x="70" y="225" text-anchor="middle">NEWPORT BEACH</text></g>
+          <g class="node"><circle class="pulse" cx="110" cy="110" r="5" fill="#C9A84C" style="animation-delay:.4s"/><circle cx="110" cy="110" r="5" fill="#C9A84C"/><text x="110" y="95" text-anchor="middle">PASADENA</text></g>
+          <g class="node"><circle class="pulse" cx="130" cy="330" r="5" fill="#C9A84C" style="animation-delay:.8s"/><circle cx="130" cy="330" r="5" fill="#C9A84C"/><text x="130" y="355" text-anchor="middle">ANAHEIM</text></g>
+          <g class="node"><circle class="pulse" cx="215" cy="80" r="5" fill="#C9A84C" style="animation-delay:1.2s"/><circle cx="215" cy="80" r="5" fill="#C9A84C"/><text x="215" y="65" text-anchor="middle">LAS VEGAS</text></g>
+          <g class="node"><circle class="pulse" cx="300" cy="400" r="5" fill="#C9A84C" style="animation-delay:1.6s"/><circle cx="300" cy="400" r="5" fill="#C9A84C"/><text x="300" y="425" text-anchor="middle">SCOTTSDALE</text></g>
+          <g class="node"><circle class="pulse" cx="420" cy="170" r="5" fill="#C9A84C" style="animation-delay:2s"/><circle cx="420" cy="170" r="5" fill="#C9A84C"/><text x="420" y="155" text-anchor="middle">NASHVILLE</text></g>
+          <g class="node"><circle class="pulse" cx="435" cy="330" r="5" fill="#C9A84C" style="animation-delay:2.4s"/><circle cx="435" cy="330" r="5" fill="#C9A84C"/><text x="435" y="355" text-anchor="middle">CHARLOTTE</text></g>
+          <g class="node"><circle class="pulse" cx="360" cy="90" r="5" fill="#C9A84C" style="animation-delay:2.8s"/><circle cx="360" cy="90" r="5" fill="#C9A84C"/><text x="360" y="75" text-anchor="middle">DALLAS</text></g>
+        </g>
+        <circle cx="250" cy="250" r="70" fill="url(#hubg)" opacity=".35"/>
+        <circle cx="250" cy="250" r="44" fill="#0B0D18" stroke="#C9A84C"/>
+        <text x="250" y="248" text-anchor="middle" font-family="Cormorant Garamond" font-size="24" fill="#E8C97A">IWFT</text>
+        <text x="250" y="266" text-anchor="middle" font-family="Montserrat" font-size="8" letter-spacing="2" fill="#7A8298">GROWTH HUB</text>
+      </svg>
+    </div>
+
+    <div class="trust">
+      <div>7<span>Growth engines</span></div>
+      <div>1<span>Shared database</span></div>
+      <div>8<span>Seminar markets</span></div>
+      <div>$42M<span>Pipeline in view</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- 7 → 1 -->
+<section class="collapse">
+  <div class="wrap">
+    <div class="eyebrow">The Problem</div>
+    <h2>Stop buying <em>seven</em> different solutions.</h2>
+    <p class="lead">Today a growth campaign runs across a patchwork of vendors, invoices and logins. None of them share data, so every hand-off leaks leads.</p>
+    <div class="collapse-grid">
+      <div class="vendors">
+        <div>Website vendor <b>$$</b></div>
+        <div>POS vendor <b>$$</b></div>
+        <div>Payment processor <b>$$</b></div>
+        <div>Marketing agency <b>$$$</b></div>
+        <div>Order tracking <b>$</b></div>
+        <div>Referral software <b>$$</b></div>
+        <div>Customer database <b>$$</b></div>
+        <div>Consultant <b>$$$</b></div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="one">
+        <h3>IWFT, all in one</h3>
+        <ul>
+          <li>One platform and one login</li>
+          <li>One growth database</li>
+          <li>One seminar strategy</li>
+          <li>One operating system</li>
+          <li>One growth budget</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEVEN ENGINES -->
+<section id="engines">
+  <div class="wrap">
+    <div class="eyebrow">The Platform</div>
+    <h2>The Seven <em>Growth Engines</em></h2>
+    <p class="lead">Each engine works alone. Together they form a single loop: attract, transact, collect, nurture, track, refer and remember.</p>
+
+    <div class="engines-grid">
+      <article class="engine">
+        <span class="num">01</span>
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18"/></svg></div>
+        <h3>Website</h3><p class="tag">Your digital headquarters.</p>
+        <ul>
+          <li>Custom websites &amp; landing pages</li>
+          <li>RIA microsites</li>
+          <li>Investor portals</li>
+          <li>Growth company profiles</li>
+          <li class="partner">Seminar sign-up via partner</li>
+        </ul>
+        <div class="benefit"><b>Benefit</b>Turn visitors into prospects, investors and attendees.</div>
+      </article>
+
+      <article class="engine">
+        <span class="num">02</span>
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 7h8M8 11h8M8 15h4"/></svg></div>
+        <h3>Point of Sale</h3><p class="tag">Manage every transaction.</p>
+        <ul>
+          <li>Membership sales</li>
+          <li>Event &amp; VIP tickets</li>
+          <li>Subscription programs</li>
+          <li>Consulting engagements</li>
+          <li>Digital product sales</li>
+        </ul>
+        <div class="benefit"><b>Benefit</b>One dashboard tracking all revenue.</div>
+      </article>
+
+      <article class="engine">
+        <span class="num">03</span>
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="1"/><path d="M2 10h20M6 15h4"/></svg></div>
+        <h3>Payments</h3><p class="tag">Collect funds seamlessly.</p>
+        <ul>
+          <li>Credit cards &amp; ACH</li>
+          <li>Recurring billing</li>
+          <li>Retainer invoicing</li>
+          <li>RIA service fees</li>
+          <li>Seminar &amp; event fees</li>
+        </ul>
+        <div class="benefit"><b>Benefit</b>Cash flow managed from one place.</div>
+      </article>
+
+      <article class="engine">
+        <span class="num">04</span>
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11l15-6v14L3 13z"/><path d="M7 13v5h3"/></svg></div>
+        <h3>Marketing</h3><p class="tag">Always-on growth.</p>
+        <ul>
+          <li>Email &amp; SMS campaigns</li>
+          <li>Social distribution</li>
+          <li>Webinar promotion</li>
+          <li>Event marketing</li>
+          <li>AI-powered content</li>
+        </ul>
+        <div class="benefit"><b>Benefit</b>Continuous lead generation.</div>
+      </article>
+
+      <article class="engine">
+        <span class="num">05</span>
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19" cy="18" r="2"/></svg></div>
+        <h3>Orders</h3><p class="tag">Track every opportunity.</p>
+        <ul>
+          <li>Consultation requests</li>
+          <li>RIA introductions</li>
+          <li>Investor inquiries</li>
+          <li>Growth company engagements</li>
+          <li>Retainer deliverables</li>
+        </ul>
+        <div class="benefit"><b>Benefit</b>Nothing falls through the cracks.</div>
+      </article>
+
+      <article class="engine">
+        <span class="num">06</span>
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 11l7.6-4M8.2 13l7.6 4"/></svg></div>
+        <h3>Referrals</h3><p class="tag">The engine of exponential growth.</p>
+        <ul>
+          <li>RIA partner referrals</li>
+          <li>College intern referrals</li>
+          <li>Strategic alliance tracking</li>
+          <li>Industry partnerships</li>
+          <li>Revenue-share workflows</li>
+        </ul>
+        <div class="benefit"><b>Benefit</b>Every participant becomes a growth source.</div>
+      </article>
+
+      <article class="engine">
+        <span class="num">07</span>
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div>
+        <h3>Customer Database</h3><p class="tag">Your most valuable asset.</p>
+        <ul>
+          <li>Investor &amp; RIA profiles</li>
+          <li>Business owners</li>
+          <li>Referral partners</li>
+          <li>Growth company executives</li>
+          <li class="partner">Syncs with seminar partner CRM</li>
+        </ul>
+        <div class="benefit"><b>Benefit</b>A proprietary growth ecosystem you own.</div>
+      </article>
+
+      <article class="engine summary">
+        <span class="num">01—07</span>
+        <h3 style="margin-top:14px">One loop.<br><em style="color:var(--gold-light)">Zero hand-offs.</em></h3>
+        <p style="font-size:.82rem;color:var(--cream-dim);margin-top:14px">Every click, payment, referral and seminar check-in lands in the same record.</p>
+      </article>
+    </div>
+
+    <div class="partner-note">
+      <span style="color:var(--teal);font-size:1.2rem">⇄</span>
+      <p><strong>Seminar partner integration.</strong> Seminar registration and the seminar CRM are provided by our seminar company partner. IWFT connects to them rather than rebuilding them: registrants and attendees flow into the IWFT customer database, and payments, referrals and follow-up marketing run on IWFT.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIETY WAVE -->
+<section id="wave">
+  <div class="wrap wave-grid">
+    <div>
+      <div class="eyebrow">The IWFT Society Wave™</div>
+      <h2>A growth <em>cooperative</em>.</h2>
+      <p class="lead">The Society Wave links RIAs, growth companies and investors through one hub. Each group's activity creates opportunity for the other two.</p>
+      <div class="receive">
+        <div class="r"><h4>RIAs receive</h4><p>Organic lead generation, educational seminars, business development support, marketing resources and strategic partnerships.</p></div>
+        <div class="r"><h4>Growth companies receive</h4><p>Capital-readiness support, investor exposure, expert resources, marketing infrastructure and seminar platforms.</p></div>
+        <div class="r"><h4>Investors receive</h4><p>Educational content, access to opportunities, trusted introductions and expert guidance.</p></div>
+      </div>
+    </div>
+
+    <svg class="eco" viewBox="0 0 520 500" role="img" aria-label="Society Wave ecosystem: RIAs and growth companies connect through the IWFT hub to investors">
+      <g fill="none" stroke="#C9A84C" stroke-opacity=".5">
+        <path d="M130 120 L230 230"/><path d="M390 120 L290 230"/><path d="M260 290 L260 370"/>
+        <path d="M150 140 Q260 60 370 140" stroke-dasharray="3 5"/>
+      </g>
+      <g fill="#C9A84C"><circle cx="230" cy="230" r="3"/><circle cx="290" cy="230" r="3"/><circle cx="260" cy="370" r="3"/></g>
+      <!-- wave -->
+      <path d="M40 460 Q100 430 160 460 T280 460 T400 460 T520 460" fill="none" stroke="#1AD6C0" stroke-opacity=".45"/>
+      <path d="M0 475 Q60 445 120 475 T240 475 T360 475 T480 475" fill="none" stroke="#1AD6C0" stroke-opacity=".25"/>
+      <!-- RIA -->
+      <rect x="20" y="60" width="200" height="90" fill="#0F1120" stroke="rgba(201,168,76,.4)"/>
+      <text x="40" y="92" font-family="Montserrat" font-size="11" letter-spacing="2" fill="#C9A84C" font-weight="600">RIAs</text>
+      <text x="40" y="116" font-family="Cormorant Garamond" font-size="18" fill="#F5F0E8">Organic growth</text>
+      <text x="40" y="136" font-family="Montserrat" font-size="10" fill="#7A8298">New clients · Seminars</text>
+      <!-- Growth -->
+      <rect x="300" y="60" width="200" height="90" fill="#0F1120" stroke="rgba(201,168,76,.4)"/>
+      <text x="320" y="92" font-family="Montserrat" font-size="11" letter-spacing="2" fill="#C9A84C" font-weight="600">GROWTH COS.</text>
+      <text x="320" y="116" font-family="Cormorant Garamond" font-size="18" fill="#F5F0E8">Capital access</text>
+      <text x="320" y="136" font-family="Montserrat" font-size="10" fill="#7A8298">Marketing · Experts</text>
+      <!-- Hub -->
+      <rect x="170" y="215" width="180" height="80" fill="#13162A" stroke="#C9A84C"/>
+      <text x="260" y="252" text-anchor="middle" font-family="Cormorant Garamond" font-size="28" fill="#E8C97A">IWFT Hub</text>
+      <text x="260" y="276" text-anchor="middle" font-family="Montserrat" font-size="9" letter-spacing="2" fill="#7A8298">ONE DATABASE · ONE BUDGET</text>
+      <!-- Investors -->
+      <rect x="160" y="370" width="200" height="70" fill="#0F1120" stroke="rgba(201,168,76,.4)"/>
+      <text x="260" y="398" text-anchor="middle" font-family="Montserrat" font-size="11" letter-spacing="2" fill="#C9A84C" font-weight="600">INVESTORS</text>
+      <text x="260" y="422" text-anchor="middle" font-family="Montserrat" font-size="10" fill="#7A8298">Opportunities · Education · Intros</text>
+      <text x="260" y="58" text-anchor="middle" font-family="Montserrat" font-size="9" letter-spacing="2" fill="#7A8298">REFERRALS</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ACCELERATOR -->
+<section class="accel" id="accelerator">
+  <div class="wrap">
+    <div class="eyebrow">Growth Company Accelerator</div>
+    <h2>From idea <em>to capital</em>.</h2>
+    <p class="lead">Growth companies engage IWFT under a monthly partnership retainer. A retainer loan can fund that budget up front, so the seminar campaign, experts and marketing start before the raise closes.</p>
+
+    <div class="accel-grid">
+      <div class="retainer">
+        <div class="lbl">Monthly retainer</div>
+        <div class="price">$25K – $100K+</div>
+        <div class="per">One growth budget, allocated across:</div>
+        <div class="alloc">
+          <div class="row"><span>Seminar production</span><span>30%</span></div><div class="bar"><i style="width:30%"></i></div>
+          <div class="row"><span>Investor awareness campaigns</span><span>25%</span></div><div class="bar"><i style="width:25%"></i></div>
+          <div class="row"><span>Expert engagement</span><span>20%</span></div><div class="bar"><i style="width:20%"></i></div>
+          <div class="row"><span>Marketing assets</span><span>15%</span></div><div class="bar"><i style="width:15%"></i></div>
+          <div class="row"><span>Strategy &amp; capital-formation support</span><span>10%</span></div><div class="bar"><i style="width:10%"></i></div>
+        </div>
+        <p style="font-size:.7rem;color:var(--slate);margin-top:20px">Illustrative allocation. Actual budgets are set per engagement.</p>
+      </div>
+
+      <ol class="flow">
+        <li><div><h4>Growth company</h4><p>Applies and is reviewed for capital readiness.</p></div></li>
+        <li><div><h4>IWFT retainer program</h4><p>Monthly partnership agreement, optionally bridged by a retainer loan.</p></div></li>
+        <li><div><h4>Marketing budget</h4><p>One budget covers website, campaigns, payments and referrals.</p></div></li>
+        <li><div><h4>Expert recruiting</h4><p>Bankers, attorneys, CFOs and speakers matched to the raise.</p></div></li>
+        <li><div><h4>National seminar campaign</h4><p>Live events in partner markets, run with our seminar partner.</p></div></li>
+        <li><div><h4>Investor introductions</h4><p>Qualified attendees routed to the right next conversation.</p></div></li>
+        <li><div><h4>Capital formation</h4><p>The raise closes, and the relationships stay in your database.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- SEMINARS -->
+<section id="seminars">
+  <div class="wrap">
+    <div class="eyebrow">Seminar &amp; Event Engine</div>
+    <h2>The <em>Seminar King</em> model.</h2>
+    <p class="lead">Seminars are the main organic growth channel. Our seminar partner runs registration and the event CRM; IWFT runs the marketing, payments and follow-up around every event.</p>
+    <div class="sem-grid">
+      <div class="sem-card">
+        <h3>Markets</h3>
+        <div class="markets">
+          <span>Newport Beach</span><span>Scottsdale</span><span>Las Vegas</span><span>Pasadena</span>
+          <span>Anaheim</span><span>Dallas</span><span>Charlotte</span><span>Nashville</span>
+        </div>
+      </div>
+      <div class="sem-card">
+        <h3>Live events</h3>
+        <div class="topics">
+          <span>Investor Education</span><span>Wealth Management</span>
+          <span>Business Growth</span><span>Capital Formation</span>
+          <span>Retirement Planning</span><span>Private Markets</span>
+        </div>
+      </div>
+    </div>
+    <p class="sem-foot"><span style="color:var(--teal)">⇄</span> Every attendee from the <b>seminar partner CRM</b> syncs into the IWFT database automatically.</p>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section class="dash" id="dashboard">
+  <div class="wrap">
+    <div class="eyebrow">Command Center</div>
+    <h2>The Executive <em>Growth Dashboard</em></h2>
+    <p class="lead">Leads, seminars, partners, pipeline and revenue in one view. Sample data shown.</p>
+
+    <div class="console">
+      <div class="console-top">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <span>app.iwouldfundthat.com / dashboard</span>
+        <span class="live">Live</span>
+      </div>
+      <div class="console-body">
+        <aside class="side">
+          <a class="on">◆ Overview</a><a>◇ Website</a><a>◇ POS</a><a>◇ Payments</a><a>◇ Marketing</a><a>◇ Orders</a><a>◇ Referrals</a><a>◇ Database</a><a>⇄ Seminar partner</a>
+        </aside>
+        <div class="main">
+          <div class="kpis">
+            <div class="kpi"><div class="k">Leads generated</div><div class="v">1,245</div><div class="d">▲ 18% MoM</div></div>
+            <div class="kpi"><div class="k">Seminar registrations</div><div class="v">312</div><div class="d">▲ 9% MoM</div></div>
+            <div class="kpi"><div class="k">Attendees</div><div class="v">256</div><div class="d">82% show rate</div></div>
+            <div class="kpi"><div class="k">Referral sources</div><div class="v">86</div><div class="d">▲ 11 new</div></div>
+            <div class="kpi"><div class="k">New RIA partners</div><div class="v">4</div><div class="d">12 total</div></div>
+            <div class="kpi"><div class="k">Growth companies</div><div class="v">7</div><div class="d">engaged</div></div>
+            <div class="kpi hi"><div class="k">Capital opportunities</div><div class="v">$42.0M</div><div class="d">in pipeline</div></div>
+            <div class="kpi hi"><div class="k">Revenue this month</div><div class="v">$315K</div><div class="d">▲ 22% MoM</div></div>
+          </div>
+
+          <div class="panels">
+            <div class="panel">
+              <h5>Monthly revenue <span>$K</span></h5>
+              <div class="chart">
+                <div style="height:42%" title="May $165K"></div><div style="height:50%" title="Jun $198K"></div><div style="height:56%" title="Jul $220K"></div>
+                <div style="height:63%" title="Aug $248K"></div><div style="height:82%" title="Sep $258K"></div><div style="height:100%" title="Oct $315K"></div>
+              </div>
+              <div class="chart-x"><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span></div>
+            </div>
+            <div class="panel">
+              <h5>Growth funnel</h5>
+              <div class="funnel">
+                <div class="f"><span>Leads</span><div><i style="width:100%"></i></div><span>1,245</span></div>
+                <div class="f"><span>Registered</span><div><i style="width:25%"></i></div><span>312</span></div>
+                <div class="f"><span>Attended</span><div><i style="width:20.5%"></i></div><span>256</span></div>
+                <div class="f"><span>Consultations</span><div><i style="width:7%"></i></div><span>88</span></div>
+                <div class="f"><span>Clients</span><div><i style="width:2.4%"></i></div><span>30</span></div>
+              </div>
+              <div class="feed">
+                <div><span class="t">09:42</span><span>Retainer · Orbit Bio</span><span class="amt">+$50,000</span></div>
+                <div><span class="t">09:15</span><span>VIP tickets · Scottsdale</span><span class="amt">+$4,800</span></div>
+                <div><span class="t">08:57</span><span>Referral · RIA partner</span><span class="amt">+1 lead</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Why IWFT Wins</div>
+    <h2>Seven systems, or <em>one</em>.</h2>
+    <div class="cmp">
+      <div class="cmp-col old">
+        <h3>The current model</h3><div class="s">Fragmented</div>
+        <ul><li>Website vendor</li><li>CRM vendor</li><li>Seminar vendor</li><li>Marketing vendor</li><li>Payment vendor</li><li>Referral vendor</li><li>Consultant</li></ul>
+        <div class="tot">Seven providers. Seven costs. Seven systems.</div>
+      </div>
+      <div class="cmp-col new">
+        <h3>The IWFT model</h3><div class="s">Integrated</div>
+        <ul><li>One platform</li><li>One growth database</li><li>One seminar strategy, with a dedicated seminar partner</li><li>One operating system</li><li>One growth budget</li></ul>
+        <div class="tot">One platform. One budget. Unlimited growth.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center">All in one platform</div>
+    <h2>I Would <em>Fund</em> That.</h2>
+    <div class="stack"><span>Website</span><span>POS</span><span>Payments</span><span>Marketing</span><span>Orders</span><span>Referrals</span><span>Database</span></div>
+    <p class="tagline">“Transforming relationships into growth.”</p>
+    <div class="hero-btns">
+      <button class="btn btn-gold" data-modal="strategy">Book a Strategy Call</button>
+      <button class="btn btn-ghost" data-modal="partner">Become a Partner</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="logo" href="#top">IWould<em>Fund</em>That</a>
+      <span>© 2026 IWouldFundThat. The Operating System for Organic Growth.</span>
+    </div>
+    <p class="disclaimer">IWouldFundThat is a marketing and technology platform. It is not a broker-dealer, investment adviser or funding portal, and nothing on this site is an offer to sell or a solicitation to buy any security. Capital-raising, securities-related and advisory activities are conducted only through appropriately registered parties and in line with applicable SEC, FINRA, state securities and investment adviser regulations. Dashboard figures are sample data for illustration.</p>
+  </div>
+</footer>
+
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="modal-box">
+    <button class="modal-x" aria-label="Close" data-close>×</button>
+    <div id="mBody"></div>
+  </div>
+</div>
+
+<script>
+const M={
+  demo:{t:'Request a demo',s:'See the seven growth engines working together on one dashboard.',f:`
+    <div class="two"><label>First name<input required name="first"></label><label>Last name<input required name="last"></label></div>
+    <label>Work email<input type="email" required name="email"></label>
+    <label>Company<input name="company"></label>
+    <label>I am a<select name="role"><option>RIA / Advisor</option><option>Growth company</option><option>Investor</option><option>Strategic partner</option></select></label>`,b:'Request Demo',d:'Thanks — we\'ll reach out within one business day to book your demo.'},
+  strategy:{t:'Schedule a strategy session',s:'A 30-minute call to map your growth budget, seminar plan and referral network.',f:`
+    <div class="two"><label>Full name<input required name="name"></label><label>Phone<input type="tel" name="phone"></label></div>
+    <label>Email<input type="email" required name="email"></label>
+    <div class="two"><label>I am a<select name="role"><option>Growth company</option><option>RIA / Advisor</option><option>Investor</option></select></label>
+    <label>Monthly budget<select name="budget"><option>$25K – $50K</option><option>$50K – $100K</option><option>$100K+</option><option>Not sure yet</option></select></label></div>
+    <label>Preferred date<input type="date" name="date"></label>
+    <label>What are you looking to achieve?<textarea rows="3" name="goal"></textarea></label>`,b:'Book Session',d:'Request received. You\'ll get a calendar confirmation by email shortly.'},
+  partner:{t:'Become a partner',s:'Join the Society Wave as an RIA, referral partner, expert or seminar market host.',f:`
+    <div class="two"><label>Full name<input required name="name"></label><label>Firm<input name="firm"></label></div>
+    <label>Email<input type="email" required name="email"></label>
+    <label>Partner type<select name="type"><option>RIA partner</option><option>Referral partner</option><option>Industry expert / speaker</option><option>College intern program</option><option>Strategic alliance</option></select></label>
+    <label>Market<select name="market"><option>Newport Beach</option><option>Scottsdale</option><option>Las Vegas</option><option>Pasadena</option><option>Anaheim</option><option>Dallas</option><option>Charlotte</option><option>Nashville</option><option>Other</option></select></label>`,b:'Apply to Partner',d:'Welcome aboard. Our partnerships team will review your application and follow up.'},
+  login:{t:'Partner login',s:'Access your IWFT growth dashboard.',f:`
+    <label>Email<input type="email" required name="email" autocomplete="username"></label>
+    <label>Password<input type="password" required name="password" autocomplete="current-password"></label>`,b:'Log In',d:'Demo mode: the live portal isn\'t connected yet. Opening the sample dashboard instead.',login:1}
+};
+const modal=document.getElementById('modal'),body=document.getElementById('mBody');
+function openModal(k){
+  const m=M[k];
+  body.innerHTML=`<h3 id="mTitle">${m.t}</h3><p class="msub">${m.s}</p><form>${m.f}<button class="btn btn-gold" type="submit">${m.b}</button>${k==='login'?'<p class="alt">No account? <a data-switch="demo">Request a demo</a></p>':''}</form>`;
+  modal.classList.add('open');document.body.style.overflow='hidden';
+  setTimeout(()=>body.querySelector('input')?.focus(),50);
+  body.querySelector('form').onsubmit=e=>{
+    e.preventDefault();
+    body.innerHTML=`<div class="done"><div class="check">✓</div><h3>${m.login?'Almost there':'Thank you'}</h3><p class="msub" style="margin:10px 0 22px">${m.d}</p><button class="btn btn-gold" data-close>${m.login?'View Dashboard':'Close'}</button></div>`;
+    if(m.login) body.querySelector('[data-close]').addEventListener('click',()=>goTo('#dashboard',true));
+  };
+}
+function closeModal(){modal.classList.remove('open');document.body.style.overflow=''}
+function goTo(sel,flash){
+  const el=document.querySelector(sel);if(!el)return;
+  el.scrollIntoView({behavior:'smooth'});
+  if(flash){const c=document.querySelector('.console');c.classList.remove('flash');void c.offsetWidth;c.classList.add('flash')}
+}
+document.addEventListener('click',e=>{
+  const o=e.target.closest('[data-modal]');if(o){e.preventDefault();openModal(o.dataset.modal);return}
+  const sw=e.target.closest('[data-switch]');if(sw){openModal(sw.dataset.switch);return}
+  if(e.target.closest('[data-close]')||e.target===modal){closeModal();return}
+  const a=e.target.closest('a[href^="#"]');if(a){e.preventDefault();goTo(a.getAttribute('href'),a.hasAttribute('data-demo'))}
+  const s=e.target.closest('.side a');if(s){document.querySelectorAll('.side a').forEach(x=>{x.classList.remove('on');x.textContent=x.textContent.replace('◆','◇')});s.classList.add('on');s.textContent=s.textContent.replace('◇','◆')}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+</script>
+</body>
+</html>
