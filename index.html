@@ -296,6 +296,43 @@ footer address{font-style:normal;line-height:1.7}
   .modal .two{grid-template-columns:1fr}
   .king-side .callout .v{font-size:3.4rem}
 }
+
+/* circular financing */
+.circle-sec{background:var(--white)}
+.circle-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.cycle{width:100%;max-width:560px;margin:0 auto;display:block}
+.flowline{stroke-dasharray:6 10;animation:flow 18s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-320}}
+@media (prefers-reduced-motion:reduce){.flowline{animation:none}}
+.node circle{fill:var(--white);stroke:var(--navy);stroke-width:1.5;transition:fill .2s}
+.node text{font-size:20px;font-weight:500;fill:var(--ink)}
+.node text.nn{font-size:15px;font-weight:600;fill:var(--brass);letter-spacing:.1em}
+.node.on circle{fill:var(--navy)}
+.node.on text{fill:#fff}
+.node.on text.nn{fill:var(--brass-soft)}
+.node{cursor:pointer}
+.cycle-steps{list-style:none;border-top:1px solid var(--ink)}
+.cycle-steps li{display:grid;grid-template-columns:50px 1fr;column-gap:10px;padding:22px 16px 22px 0;border-bottom:1px solid var(--rule);cursor:pointer;transition:background .2s,padding .2s}
+.cycle-steps li::before{content:"0" attr(data-n);font-family:var(--serif);font-style:italic;color:var(--brass);font-size:1.2rem;grid-row:span 2}
+.cycle-steps h4{font-size:1.45rem;font-weight:400}
+.cycle-steps p{font-size:1rem;color:var(--ink-2);margin-top:4px}
+.cycle-steps li.on{background:var(--paper);padding-left:16px}
+.wins{margin-top:90px;border-top:1px solid var(--ink)}
+.wins-row{display:grid;grid-template-columns:1fr 1.2fr 1.4fr 180px;gap:30px;padding:22px 0;border-bottom:1px solid var(--rule);align-items:baseline;font-size:1rem;color:var(--ink-2)}
+.wins-row b{font-family:var(--serif);font-weight:400;font-size:1.35rem;color:var(--ink)}
+.wins-row em{font-style:normal;font-family:var(--serif);font-size:1.6rem;color:var(--navy);text-align:right}
+.wins-row em.soft{font-size:1.05rem;font-family:var(--sans);color:var(--brass);font-weight:600}
+.wins-head{font-size:.86rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:16px 0}
+.wins-head span:last-child{text-align:right}
+@media (max-width:1100px){.circle-grid{grid-template-columns:1fr;gap:50px}}
+@media (max-width:760px){
+  .wins-head{display:none}
+  .wins-row{grid-template-columns:1fr auto;gap:6px 16px}
+  .wins-row b{grid-column:1}.wins-row em{grid-column:2;grid-row:1}
+  .wins-row span{grid-column:1/-1}
+  .wins-row span:nth-of-type(1)::before{content:"Contributes: ";font-weight:600;color:var(--ink)}
+  .wins-row span:nth-of-type(2)::before{content:"Receives: ";font-weight:600;color:var(--ink)}
+}
 </style>
 </head>
 <body>
@@ -305,9 +342,9 @@ footer address{font-style:normal;line-height:1.7}
     <a class="logo" href="#top">IWould<i>Fund</i>That<small>Growth Platform</small></a>
     <ul>
       <li><a href="#thesis">For Sponsors</a></li>
+      <li><a href="#circle">Funding Model</a></li>
       <li><a href="#seminars">Seminars</a></li>
       <li><a href="#platform">Platform</a></li>
-      <li><a href="#portfolio">Portfolio View</a></li>
       <li><a href="#growth-companies">Growth Companies</a></li>
     </ul>
     <div class="nav-r">
@@ -324,10 +361,10 @@ footer address{font-style:normal;line-height:1.7}
       <div>
         <div class="kicker">For private equity sponsors <span>&amp; their RIA platforms</span></div>
         <h1>You acquired the advisors. Now <em>grow</em> the enterprise.</h1>
-        <p class="lead">IWouldFundThat gives private equity sponsors and their portfolio RIAs a repeatable system for organic growth. It runs on the dinner seminar, the top-ranked source of new-client production in national advisor data, and puts marketing, payments, referrals and client data on one platform with one budget.</p>
+        <p class="lead">IWouldFundThat gives private equity sponsors and their portfolio RIAs a repeatable system for organic growth. It runs on the dinner seminar, the top-ranked source of new-client production in national advisor data, And it pays for itself: a circular financing model funds every campaign, so neither the sponsor nor the RIA spends a dollar out of pocket.</p>
         <div class="hero-ctas">
           <button class="btn btn-solid" data-modal="briefing">Request a sponsor briefing <span class="arr">→</span></button>
-          <a class="btn btn-line" href="#portfolio" data-demo>See the portfolio view</a>
+          <a class="btn btn-line" href="#circle">See how it's funded</a>
         </div>
       </div>
 
@@ -337,7 +374,7 @@ footer address{font-style:normal;line-height:1.7}
         <ul>
           <li><span>i.</span><div><b>Acquisitions add scale</b> but do little for the multiple on their own.</div></li>
           <li><span>ii.</span><div><b>Organic growth</b> is what buyers pay a premium for at exit.</div></li>
-          <li><span>iii.</span><div><b>IWFT makes it measurable</b> by advisor, market and campaign.</div></li>
+          <li><span>iii.</span><div><b>IWFT delivers it at no cost</b> to the RIA, so the growth never comes off EBITDA.</div></li>
         </ul>
       </aside>
     </div>
@@ -352,7 +389,7 @@ footer address{font-style:normal;line-height:1.7}
       <div><div class="v num-tab">#1</div><div class="k">Dinner seminars' rank among new-client production sources</div></div>
       <div><div class="v num-tab">2,000+</div><div class="k">Seminars run nationally each month through our partner network</div></div>
       <div><div class="v num-tab">~48%</div><div class="k">Average attendee-to-appointment rate nationally</div></div>
-      <div><div class="v num-tab">7 → 1</div><div class="k">Vendors replaced by a single platform and budget</div></div>
+      <div><div class="v num-tab">$0</div><div class="k">Out-of-pocket marketing cost to the sponsor or the RIA</div></div>
     </div>
   </div>
 </header>
@@ -370,17 +407,71 @@ footer address{font-style:normal;line-height:1.7}
     <div class="thesis">
       <article><span class="n">i.</span><h3>Buyers pay for proven growth</h3><p>Exit buyers look for net-new assets that come from the platform itself, not from markets or acquisitions. Without a documented growth engine, that story is hard to tell.</p></article>
       <article><span class="n">ii.</span><h3>Advisors aren't marketers</h3><p>Acquired advisors are excellent with clients and rarely run disciplined prospecting. Growth depends on a handful of producers and is hard to repeat across the platform.</p></article>
-      <article><span class="n">iii.</span><h3>Fragmented vendors hide the data</h3><p>Mailers, events, CRM, payments and referrals sit with different vendors. The sponsor can't see cost per household or return by market, so capital can't be allocated well.</p></article>
+      <article><span class="n">iii.</span><h3>Marketing comes off EBITDA</h3><p>Every dollar an RIA spends on seminars and mailers reduces the EBITDA the exit multiple is applied to. Growth that has to be paid for upfront is growth most platforms put off.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- CIRCULAR FINANCING -->
+<section class="circle-sec" id="circle">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="kicker">02 <span>The circular financing model</span></div>
+        <h2>No one pays out of pocket. <em>Everybody wins.</em></h2>
+      </div>
+      <p class="lead">IWFT connects the growth companies that need investor awareness with the RIAs that need new clients. Retainer lenders fund the growth company's campaign, the seminars run in the RIA's market, and the capital raise repays the lenders. Then the circle starts again.</p>
+    </div>
+
+    <div class="circle-grid">
+      <svg class="cycle" viewBox="0 0 600 600" role="img" aria-labelledby="cycTitle">
+        <title id="cycTitle">The IWFT financing circle: retainer lenders fund the growth company, which funds IWFT seminars, which bring RIAs new clients and investors education, and the capital raised repays the lenders.</title>
+        <circle cx="300" cy="300" r="215" fill="none" stroke="#DCD6C9" stroke-width="2"/>
+        <circle class="flowline" cx="300" cy="300" r="215" fill="none" stroke="#8E6F37" stroke-width="2"/>
+        <g fill="#8E6F37">
+          <path d="M-8,-7 L8,0 L-8,7 Z" transform="translate(426.4 126.1) rotate(36)"/>
+          <path d="M-8,-7 L8,0 L-8,7 Z" transform="translate(504.5 366.4) rotate(108)"/>
+          <path d="M-8,-7 L8,0 L-8,7 Z" transform="translate(300 515) rotate(180)"/>
+          <path d="M-8,-7 L8,0 L-8,7 Z" transform="translate(95.5 366.4) rotate(252)"/>
+          <path d="M-8,-7 L8,0 L-8,7 Z" transform="translate(173.6 126.1) rotate(324)"/>
+        </g>
+        <text x="300" y="290" text-anchor="middle" font-family="Newsreader" font-style="italic" font-size="44" fill="#13294B">Everybody</text>
+        <text x="300" y="338" text-anchor="middle" font-family="Newsreader" font-style="italic" font-size="44" fill="#13294B">wins.</text>
+        <g class="nodes" font-family="Inter Tight" text-anchor="middle">
+          <g class="node" data-n="1"><circle cx="300" cy="85" r="66"/><text x="300" y="66" class="nn">01</text><text x="300" y="92">Retainer</text><text x="300" y="116">lenders</text></g>
+          <g class="node" data-n="2"><circle cx="504.5" cy="233.6" r="66"/><text x="504.5" y="214.6" class="nn">02</text><text x="504.5" y="240.6">Growth</text><text x="504.5" y="264.6">company</text></g>
+          <g class="node" data-n="3"><circle cx="426.4" cy="473.9" r="66"/><text x="426.4" y="454.9" class="nn">03</text><text x="426.4" y="480.9">IWFT</text><text x="426.4" y="504.9">seminars</text></g>
+          <g class="node" data-n="4"><circle cx="173.6" cy="473.9" r="66"/><text x="173.6" y="454.9" class="nn">04</text><text x="173.6" y="480.9">RIA</text><text x="173.6" y="504.9">platform</text></g>
+          <g class="node" data-n="5"><circle cx="95.5" cy="233.6" r="66"/><text x="95.5" y="214.6" class="nn">05</text><text x="95.5" y="240.6">Investors</text><text x="95.5" y="264.6">&amp; capital</text></g>
+        </g>
+      </svg>
+
+      <ol class="cycle-steps">
+        <li data-n="1"><h4>Retainer lenders fund the bridge</h4><p>Lenders advance the growth company's IWFT retainer and earn an interest carry plus negotiated equity in the company.</p></li>
+        <li data-n="2"><h4>The growth company funds the campaign</h4><p>Its retainer ($25K–$100K+ a month) pays for seminar production, marketing and expert support, with no cash upfront.</p></li>
+        <li data-n="3"><h4>IWFT runs the seminars</h4><p>Dinner seminar campaigns are produced in the RIA's own market: invitations, venue, RSVP, coaching and follow-up.</p></li>
+        <li data-n="4"><h4>The RIA wins new clients</h4><p>Advisors host and present, book appointments and add households and assets, at no out-of-pocket cost to the firm or its sponsor.</p></li>
+        <li data-n="5"><h4>Investors learn, and capital is raised</h4><p>Attendees get education and access to opportunities. The growth company's raise repays the retainer lenders, and the circle starts again.</p></li>
+      </ol>
+    </div>
+
+    <div class="wins">
+      <div class="wins-row wins-head"><span>Participant</span><span>Contributes</span><span>Receives</span><span>Out of pocket</span></div>
+      <div class="wins-row"><b>Private equity sponsor</b><span>Access to its RIA platforms</span><span>Organic growth that supports the exit multiple</span><em>$0</em></div>
+      <div class="wins-row"><b>RIA &amp; advisors</b><span>Hosts and presents the seminars</span><span>New households and assets under management</span><em>$0</em></div>
+      <div class="wins-row"><b>Growth company</b><span>Retainer, repaid from the capital raise</span><span>Investor awareness, seminars and capital-readiness support</span><em>$0 upfront</em></div>
+      <div class="wins-row"><b>Retainer lender</b><span>Bridge capital for the retainer</span><span>Interest carry plus negotiated equity</span><em class="soft">Repaid with interest</em></div>
+      <div class="wins-row"><b>Investors</b><span>An evening of their time</span><span>Education, trusted advisors and access to opportunities</span><em>$0</em></div>
     </div>
   </div>
 </section>
 
 <!-- VALUE CREATION PLAN -->
-<section class="plan">
+<section>
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <div class="kicker">02 <span>The value creation plan</span></div>
+        <div class="kicker">03 <span>The value creation plan</span></div>
         <h2>A 100-day plan for <em>organic growth</em>.</h2>
       </div>
       <p class="lead">One engagement across the whole portfolio. It is the same playbook in every market, and every result reports back to one dashboard.</p>
@@ -410,7 +501,7 @@ footer address{font-style:normal;line-height:1.7}
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <div class="kicker">03 <span>The King of Seminars</span></div>
+        <div class="kicker">04 <span>The King of Seminars</span></div>
         <h2>Outside existing clients, nothing produces like the <em>dinner seminar</em>.</h2>
       </div>
       <p class="lead">In a national study of where advisor production comes from, dinner seminar mailers ranked first among every new-client source. That puts them ahead of referrals, radio, TV and digital. IWFT is built around that channel.</p>
@@ -478,7 +569,7 @@ footer address{font-style:normal;line-height:1.7}
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <div class="kicker">04 <span>The platform</span></div>
+        <div class="kicker">05 <span>The platform</span></div>
         <h2>Seven capabilities. <em>One</em> operating system.</h2>
       </div>
       <p class="lead">Everything that happens around a seminar runs on IWFT: the invitation, the payment, the follow-up and the referral. One record per household, one budget per portfolio.</p>
@@ -501,7 +592,7 @@ footer address{font-style:normal;line-height:1.7}
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <div class="kicker">05 <span>Portfolio view</span></div>
+        <div class="kicker">06 <span>Portfolio view</span></div>
         <h2>Every firm, every market, <em>one report</em>.</h2>
       </div>
       <p class="lead">Sponsors see organic growth across the whole portfolio, from seminar seat to signed household, and can move budget to the firms that convert best.</p>
@@ -542,10 +633,10 @@ footer address{font-style:normal;line-height:1.7}
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <div class="kicker">06 <span>For growth companies</span></div>
-        <h2>The same engine, <em>pointed at capital</em>.</h2>
+        <div class="kicker">07 <span>Growth companies</span></div>
+        <h2>The other half of <em>the circle</em>.</h2>
       </div>
-      <p class="lead">Growth companies use the same seminar, marketing and investor network to become capital-ready. A monthly retainer funds the campaign, and a retainer loan can bridge it until the raise closes.</p>
+      <p class="lead">Growth companies are what make the model work. Their retainer funds the seminars, retainer lenders advance it so nothing is paid upfront, and the capital raise pays it back.</p>
     </div>
     <div class="gc-grid">
       <div class="retainer">
@@ -558,16 +649,15 @@ footer address{font-style:normal;line-height:1.7}
           <li>Expert engagement</li>
           <li>Strategic and capital-formation support</li>
         </ul>
-        <p>Scope and budget are set per engagement.</p>
+        <p>Funded upfront by IWFT retainer lenders and repaid from the raise. Scope and budget are set per engagement.</p>
       </div>
       <ol class="steps">
         <li><h4>Growth company</h4><p>Reviewed for capital readiness</p></li>
-        <li><h4>Retainer program</h4><p>Monthly agreement, optionally bridged by a retainer loan</p></li>
-        <li><h4>Marketing budget</h4><p>One budget across web, campaigns, payments and referrals</p></li>
+        <li><h4>Retainer, lender-funded</h4><p>Retainer lenders advance the monthly retainer</p></li>
+        <li><h4>Seminars in RIA markets</h4><p>Campaigns run with portfolio RIAs at no cost to them</p></li>
         <li><h4>Expert recruiting</h4><p>Bankers, attorneys, CFOs and speakers matched to the raise</p></li>
-        <li><h4>Seminar campaign</h4><p>Live events in partner markets nationwide</p></li>
         <li><h4>Introductions</h4><p>Qualified attendees routed to the right conversation</p></li>
-        <li><h4>Capital formation</h4><p>The raise closes, and the relationships stay in the database</p></li>
+        <li><h4>Capital formation</h4><p>The raise closes and repays the lenders</p></li>
       </ol>
     </div>
 
@@ -580,36 +670,12 @@ footer address{font-style:normal;line-height:1.7}
   </div>
 </section>
 
-<!-- COMPARE -->
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <div class="kicker">07 <span>Why IWFT</span></div>
-        <h2>Seven vendors, or <em>one partner</em>.</h2>
-      </div>
-    </div>
-    <div class="cmp">
-      <div class="old">
-        <h3>Today</h3>
-        <ul><li>Website vendor<span>Separate contract</span></li><li>Seminar &amp; mail vendor<span>Separate contract</span></li><li>Marketing agency<span>Separate contract</span></li><li>Payment processor<span>Separate contract</span></li><li>Referral software<span>Separate contract</span></li><li>CRM / database<span>Separate contract</span></li><li>Growth consultant<span>Separate contract</span></li></ul>
-        <p class="tot">Seven costs, seven systems, no single view.</p>
-      </div>
-      <div class="new">
-        <h3>With IWFT</h3>
-        <ul><li>One platform</li><li>One seminar strategy</li><li>One growth database</li><li>One portfolio report</li><li>One growth budget</li></ul>
-        <p class="tot">One platform. One budget. Measurable growth.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CTA -->
 <section class="cta" id="cta">
   <div class="wrap cta-grid">
     <div>
-      <h2>Build the growth story <em>before</em> the exit.</h2>
-      <p>We'll walk your team through the platform and the seminar program, and how both would run across your RIA holdings.</p>
+      <h2>Organic growth, <em>with nothing out of pocket</em>.</h2>
+      <p>We'll walk your team through the circular financing model and the seminar program, and how both would run across your RIA holdings.</p>
     </div>
     <div class="stack">
       <button class="btn btn-solid" data-modal="briefing">Request a sponsor briefing <span class="arr">→</span></button>
@@ -649,6 +715,11 @@ document.getElementById('bars').innerHTML=DATA.map(([n,v,c='',m=''])=>
 document.querySelector('#tbl tbody').innerHTML=DATA.map(([n,v,,m=''])=>`<tr><td>${n}</td><td>${v.toFixed(1)}%${m}</td></tr>`).join('');
 document.getElementById('tblBtn').onclick=e=>{const t=document.getElementById('tbl');t.classList.toggle('show');e.target.textContent=t.classList.contains('show')?'Hide table':'View as table'};
 
+/* financing circle: link steps and nodes */
+function lightStep(n){document.querySelectorAll('.node,.cycle-steps li').forEach(el=>el.classList.toggle('on',el.dataset.n===n))}
+document.querySelectorAll('.node,.cycle-steps li').forEach(el=>{el.addEventListener('mouseenter',()=>lightStep(el.dataset.n));el.addEventListener('click',()=>lightStep(el.dataset.n))});
+document.querySelector('.circle-grid').addEventListener('mouseleave',()=>lightStep(null));
+
 /* report tabs (visual only) */
 document.getElementById('tabs').addEventListener('click',e=>{if(e.target.tagName!=='BUTTON')return;document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b===e.target))});
 
@@ -657,7 +728,7 @@ const M={
   briefing:{t:'Request a sponsor briefing',s:'A 45-minute walkthrough of the platform, the seminar program and a growth plan for your RIA holdings.',f:`
     <div class="two"><label>Full name<input required name="name"></label><label>Title<input name="title"></label></div>
     <div class="two"><label>Firm<input required name="firm"></label><label>Work email<input type="email" required name="email"></label></div>
-    <div class="two"><label>Your organization<select name="org"><option>Private equity sponsor</option><option>RIA platform / aggregator</option><option>Independent RIA</option><option>Growth company</option></select></label>
+    <div class="two"><label>Your organization<select name="org"><option>Private equity sponsor</option><option>RIA platform / aggregator</option><option>Independent RIA</option><option>Growth company</option><option>Retainer lender</option></select></label>
     <label>RIAs in portfolio<select name="count"><option>1–3</option><option>4–10</option><option>11–25</option><option>25+</option><option>N/A</option></select></label></div>
     <label>What would you like to cover?<textarea rows="3" name="notes"></textarea></label>`,b:'Request briefing',d:'Thank you. A member of our team will contact you within one business day to schedule the briefing.'},
   strategy:{t:'Book a strategy call',s:'A 30-minute call to map your growth budget, seminar markets and referral network.',f:`
@@ -666,10 +737,10 @@ const M={
     <div class="two"><label>I am a<select name="role"><option>PE sponsor</option><option>RIA / advisor</option><option>Growth company</option><option>Investor</option></select></label>
     <label>Preferred date<input type="date" name="date"></label></div>
     <label>Goals<textarea rows="3" name="goal"></textarea></label>`,b:'Book call',d:'Request received. You will receive a calendar confirmation by email shortly.'},
-  partner:{t:'Become a partner',s:'Join the Society Wave as an RIA, referral partner, expert or market host.',f:`
+  partner:{t:'Become a partner',s:'Join the Society Wave as an RIA, retainer lender, referral partner, expert or market host.',f:`
     <div class="two"><label>Full name<input required name="name"></label><label>Firm<input name="firm"></label></div>
     <label>Email<input type="email" required name="email"></label>
-    <div class="two"><label>Partner type<select name="type"><option>RIA partner</option><option>Referral / COI partner</option><option>Expert or speaker</option><option>College intern program</option><option>Strategic alliance</option></select></label>
+    <div class="two"><label>Partner type<select name="type"><option>RIA partner</option><option>Retainer lender</option><option>Referral / COI partner</option><option>Expert or speaker</option><option>College intern program</option><option>Strategic alliance</option></select></label>
     <label>Market<select name="market"><option>Newport Beach</option><option>Scottsdale</option><option>Las Vegas</option><option>Pasadena</option><option>Anaheim</option><option>Dallas</option><option>Charlotte</option><option>Nashville</option><option>Other</option></select></label></div>`,b:'Apply',d:'Thank you. Our partnerships team will review your application and follow up.'},
   login:{t:'Client login',s:'Access your portfolio growth report.',f:`
     <label>Email<input type="email" required name="email" autocomplete="username"></label>
@@ -703,4 +774,5 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 </script>
 </body>
 </html>
+
 
